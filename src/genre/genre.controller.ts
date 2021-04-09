@@ -1,16 +1,16 @@
 import { Body, Controller, Get, Post } from '@nestjs/common';
-import GenreServices from './genre.service';
+import GenreService from './genre.service';
 import CreateGenreDto from '../dto/create-genre.dto';
 
 @Controller('genre')
 export default class GenreController {
-  constructor(private readonly genreServices: GenreServices) {}
+  constructor(private readonly genreService: GenreService) {}
   @Post('post')
   postGenre( @Body() genre: CreateGenreDto) {
-    return this.genreServices.insert(genre);
+    return this.genreService.insert(genre);
   }
   @Get()
   getAll() {
-    return this.genreServices.getAllGenre();
+    return this.genreService.getAllGenre();
   }
 }
