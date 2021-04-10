@@ -3,7 +3,7 @@ import UserEntity from './user.entity';
 import GenreEntity from './genre.entity';
 
 @Entity()
-export default class BookEntity extends BaseEntity 
+export default class BookEntity extends BaseEntity
 {
     @PrimaryGeneratedColumn()
     id: number;

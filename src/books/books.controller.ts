@@ -1,18 +1,22 @@
-import { Body, Controller, Get, Post} from '@nestjs/common';
-import { BooksService } from './books.service';
-import CreateBookDto from '../dto/create-book.dto';
+import { Body, Controller, Get, Post } from '@nestjs/common';
+import {ApiResponse} from '@nestjs/swagger';
+import { BooksServices } from './books.service';
+import CreateBookDto from './dto/create-book.dto';
+
 
 @Controller('books')
 export class BooksController {
-  constructor(private readonly booksService: BooksService) {}
+    constructor(private readonly booksServices: BooksServices) {}
 
-  @Post('post')
-  postUser( @Body() user: CreateBookDto) {
-    return this.booksService.insert(user);
-  }
+    @ApiResponse({ status: 200, description: "handles creation of new books" })
+    @Post('post')
+    postBook( @Body() genre: CreateBookDto) {
+        return this.booksServices.insert(genre);
+    }
 
-  @Get()
-  getAll() {
-    return this.booksService.getAllBooks();
-  }
+    @ApiResponse({ status: 200, description: "returns a list of existing books in the database" })
+    @Get()
+    getAll() {
+        return this.booksServices.getAllBooks();
+    }
 }
