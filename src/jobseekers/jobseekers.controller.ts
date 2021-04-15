@@ -16,21 +16,22 @@ export class JobseekersController {
     return this.jobseekersService.insertEmployer(emp);
   }
 
+
   @ApiResponse({ status: 200, description: "creates a new freelancer" })
-  @Post('employers')
+  @Post('freelancers')
   postFreelancer( @Body() frl: CreateFreelancerDto) {
     return this.jobseekersService.insertFreelancer(frl);
   }
 
-  @ApiResponse({ status: 200, description: "creates a new order" })
+  @ApiResponse({ status: 200, description: "creates a new order associated with the employer having 'employerId'" })
   @Post('employers/orders')
   postOrder( @Body() order: CreateOrderDto, @Param() employerId: number) {
-    return this.jobseekersService.insertOrder(order, employerId);
+    return this.jobseekersService.insertOrder(order);
   }
 
-  @ApiResponse({ status: 200, description: "creates a new skill" })
+  @ApiResponse({ status: 200, description: "creates a new skill associated with the freelancer having 'freelancerId'" })
   @Post('freelancers/skills')
   postSkill( @Body() skill: CreateSkillDto, @Param() freelancerId: number) {
-    return this.jobseekersService.insertSkill(skill, freelancerId);
+    return this.jobseekersService.insertSkill(skill);
   }
 }

@@ -21,9 +21,9 @@ export class JobseekersService {
     await EmployerEntity.save(employerEntity);
     return employerEntity;
   }
-  async insertOrder(orderDetails: CreateOrderDto, employerId: number): Promise<OrderEntity> {
+  async insertOrder(orderDetails: CreateOrderDto): Promise<OrderEntity> {
     const newOrder = OrderEntity.create();
-    const {orderId, budget, duration, description, category, minWorkExp} = orderDetails;
+    const {orderId, employerId, budget, duration, description, category, minWorkExp} = orderDetails;
     newOrder.id = orderId;
     newOrder.employerId = await EmployerEntity.findOne(employerId);
     newOrder.budget = budget;
@@ -44,9 +44,9 @@ export class JobseekersService {
     await FreelancerEntity.save(freelancerEntity);
     return freelancerEntity;
   }
-  async insertSkill(skillDetails: CreateSkillDto, freelancerId: number): Promise<SkillEntity> {
+  async insertSkill(skillDetails: CreateSkillDto): Promise<SkillEntity> {
     const newSkill = SkillEntity.create();
-    const {skillId, name, level} = skillDetails;
+    const {skillId, freelancerId, name, level} = skillDetails;
     newSkill.id = skillId;
     newSkill.freelancerId = await FreelancerEntity.findOne(freelancerId);
     newSkill.name = name;

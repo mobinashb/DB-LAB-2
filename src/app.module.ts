@@ -10,14 +10,15 @@ import OrderEntity from './db/entity/order.entity';
 import SkillEntity from './db/entity/skill.entity';
 
 @Module({
-  imports: [,
+  imports: [
+    JobseekersModule,
     TypeOrmModule.forFeature(
     [UserEntity, EmployerEntity, FreelancerEntity, OrderEntity, SkillEntity],
   ),
 
   TypeOrmModule.forRoot(),
 
-  JobseekersModule,],
+  ],
   controllers: [AppController],
   providers: [
     AppService,],
