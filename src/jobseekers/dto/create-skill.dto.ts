@@ -4,9 +4,6 @@ export default class CreateSkillDto {
     @ApiProperty({type: "number", description:"skill id", maxLength: 500})
     readonly skillId: number;
 
-    @ApiProperty({type: "number", description:"the resume id associated with the skill"})
-    readonly resumeID: number;
-
     @ApiProperty({type: "number", description:"the freelancer id associated with the skill"})
     readonly freelancerID: number;
 
