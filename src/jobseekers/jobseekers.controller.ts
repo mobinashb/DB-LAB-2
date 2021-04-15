@@ -64,8 +64,8 @@ export class JobseekersController {
 
   @ApiResponse({ status: 200, description: "deletes an existing order" })
   @Delete('employers/orders')
-  deleteOrder( @Param() orderId: number) {
-    return this.jobseekersService.deleteOrder(orderId);
+  deleteOrder( @Param() id: number) {
+    return this.jobseekersService.deleteOrder(id);
   }
 
   @ApiResponse({ status: 200, description: "creates a new skill associated with the freelancer having 'freelancerId'" })
@@ -82,7 +82,7 @@ export class JobseekersController {
 
   @ApiResponse({ status: 200, description: "deletes an existing skill" })
   @Delete('freelancers/skills')
-  deleteSkill( @Param() skillId: number) {
-    return this.jobseekersService.deleteSkill(skillId);
+  deleteSkill( @Param() id: number) {
+    return this.jobseekersService.deleteSkill(id);
   }
 }

@@ -8,6 +8,6 @@ export default class EmployerEntity extends UserEntity {
     @Column({ length: 500, nullable: true })
     organization: string;
 
-    @OneToMany( type => OrderEntity , order => order.employerId)
+    @OneToMany( type => OrderEntity , order => order.employer)
     orders: OrderEntity[];
 }

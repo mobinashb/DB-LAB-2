@@ -22,6 +22,6 @@ export default class OrderEntity extends BaseEntity {
     @Column()
     minWorkExp: number;
 
-    @ManyToOne(type => EmployerEntity, employer => employer.orders)
-    employerId: EmployerEntity;
+    @ManyToOne(type => EmployerEntity, employer => employer.orders, { cascade: true, onDelete: 'CASCADE' })
+    employer: EmployerEntity;
 }

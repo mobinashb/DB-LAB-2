@@ -41,7 +41,7 @@ export class JobseekersService {
   async insertOrder(orderDetails: CreateOrderDto): Promise<OrderEntity> {
     const newOrder = OrderEntity.create();
     const {employerId, budget, duration, description, category, minWorkExp} = orderDetails;
-    newOrder.employerId = await EmployerEntity.findOne(employerId);
+    newOrder.employer = await EmployerEntity.findOne(employerId);
     newOrder.budget = budget;
     newOrder.duration = duration;
     newOrder.description = description;
@@ -53,7 +53,7 @@ export class JobseekersService {
   async updateOrder(orderDetails: UpdateOrderDto): Promise<OrderEntity> {
     const {orderId, employerId, budget, duration, description, category, minWorkExp} = orderDetails;
     const order = await OrderEntity.findOne(orderId);
-    order.employerId = await EmployerEntity.findOne(employerId);
+    order.employer = await EmployerEntity.findOne(employerId);
     order.budget = budget;
     order.duration = duration;
     order.description = description;
@@ -80,6 +80,7 @@ export class JobseekersService {
     const {id, name, cardNum} = FreelancerDetails;
     const freelancer = await FreelancerEntity.findOne(id);
     freelancer.name = name;
+    freelancer.cardNum = cardNum;
     await freelancer.save();
     return freelancer;
   }
@@ -91,7 +92,7 @@ export class JobseekersService {
   async insertSkill(skillDetails: CreateSkillDto): Promise<SkillEntity> {
     const newSkill = SkillEntity.create();
     const {freelancerId, name, level} = skillDetails;
-    newSkill.freelancerId = await FreelancerEntity.findOne(freelancerId);
+    newSkill.freelancer = await FreelancerEntity.findOne(freelancerId);
     newSkill.name = name;
     newSkill.level = level;
     await SkillEntity.save(newSkill);
@@ -100,7 +101,7 @@ export class JobseekersService {
   async updateSkill(skillDetails: UpdateSkillDto): Promise<SkillEntity> {
     const {skillId, freelancerId, name, level} = skillDetails;
     const skill = await SkillEntity.findOne(skillId);
-    skill.freelancerId = await FreelancerEntity.findOne(freelancerId);
+    skill.freelancer = await FreelancerEntity.findOne(freelancerId);
     skill.name = name;
     skill.level = level;
     await skill.save();

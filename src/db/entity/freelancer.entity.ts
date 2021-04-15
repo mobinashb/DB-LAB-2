@@ -8,6 +8,6 @@ export default class FreelancerEntity extends UserEntity {
     @Column({ length: 16 })
     cardNum: string;
 
-    @OneToMany( type => SkillEntity , skill => skill.freelancerId)
+    @OneToMany( type => SkillEntity , skill => skill.freelancer)
     skills: SkillEntity[];
 }
