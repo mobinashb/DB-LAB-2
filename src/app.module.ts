@@ -6,9 +6,12 @@ import BooksModule from './books/books.module';
 import GenreModule from './genre/genre.module';
 import UserModule from './user/user.module';
 import { TypeOrmModule } from '@nestjs/typeorm';
+import { AuthModule } from './auth/auth.module';
 import UserEntity from './db/entity/user.entity';
 import BookEntity from './db/entity/book.entity';
 import GenreEntity from './db/entity/genre.entity';
+import { JwtAuthGuard } from './auth/jwt-auth.guard';
+import { APP_GUARD } from '@nestjs/core';
 
 @Module({
   imports: [HelloModule, UserModule, BooksModule, GenreModule,
@@ -16,8 +19,15 @@ import GenreEntity from './db/entity/genre.entity';
     [UserEntity, BookEntity , GenreEntity],
   ),
 
-  TypeOrmModule.forRoot(),],
+  TypeOrmModule.forRoot(),
+
+  AuthModule,],
   controllers: [AppController],
-  providers: [AppService],
+  providers: [
+    AppService,
+    {
+      provide: APP_GUARD,
+      useClass: JwtAuthGuard
+  }],
 })
 export class AppModule {}
