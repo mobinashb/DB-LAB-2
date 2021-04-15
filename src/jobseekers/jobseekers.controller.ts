@@ -1,9 +1,10 @@
-import { Body, Controller, Param, Post } from '@nestjs/common';
+import { Body, Controller, Param, Post, Put } from '@nestjs/common';
 import { ApiResponse } from '@nestjs/swagger';
 import CreateEmployerDto from './dto/create-employer.dto';
 import CreateFreelancerDto from './dto/create-freelancer.dto';
 import CreateOrderDto from './dto/create-order.dto';
 import CreateSkillDto from './dto/create-skill.dto';
+import UpdateUserDto from './dto/update-user.dto';
 import { JobseekersService } from './jobseekers.service';
 
 @Controller('jobseekers')
@@ -16,6 +17,11 @@ export class JobseekersController {
     return this.jobseekersService.insertEmployer(emp);
   }
 
+  @ApiResponse({ status: 200, description: "updates an existing employer" })
+  @Put('employers')
+  putEmployer( @Body() emp: UpdateUserDto) {
+    return this.jobseekersService.updateEmployer(emp);
+  }
 
   @ApiResponse({ status: 200, description: "creates a new freelancer" })
   @Post('freelancers')

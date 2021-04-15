@@ -12,8 +12,7 @@ import CreateSkillDto from './dto/create-skill.dto';
 export class JobseekersService {
   async insertEmployer(employerDetails: CreateEmployerDto): Promise<EmployerEntity> {
     const employerEntity: EmployerEntity = EmployerEntity.create();
-    const {id, name, organization} = employerDetails;
-    employerEntity.id = id;
+    const {name, organization} = employerDetails;
     employerEntity.name = name;
     if (organization)
       employerEntity.organization = organization;
@@ -23,8 +22,7 @@ export class JobseekersService {
   }
   async insertOrder(orderDetails: CreateOrderDto): Promise<OrderEntity> {
     const newOrder = OrderEntity.create();
-    const {orderId, employerId, budget, duration, description, category, minWorkExp} = orderDetails;
-    newOrder.id = orderId;
+    const {employerId, budget, duration, description, category, minWorkExp} = orderDetails;
     newOrder.employerId = await EmployerEntity.findOne(employerId);
     newOrder.budget = budget;
     newOrder.duration = duration;
@@ -36,8 +34,7 @@ export class JobseekersService {
   }
   async insertFreelancer(freelancerDetails: CreateFreelancerDto): Promise<FreelancerEntity> {
     const freelancerEntity: FreelancerEntity = FreelancerEntity.create();
-    const {id, name, cardNum} = freelancerDetails;
-    freelancerEntity.id = id;
+    const {name, cardNum} = freelancerDetails;
     freelancerEntity.name = name;
     freelancerEntity.cardNum = cardNum;
     freelancerEntity.skills = [];
@@ -46,8 +43,7 @@ export class JobseekersService {
   }
   async insertSkill(skillDetails: CreateSkillDto): Promise<SkillEntity> {
     const newSkill = SkillEntity.create();
-    const {skillId, freelancerId, name, level} = skillDetails;
-    newSkill.id = skillId;
+    const {freelancerId, name, level} = skillDetails;
     newSkill.freelancerId = await FreelancerEntity.findOne(freelancerId);
     newSkill.name = name;
     newSkill.level = level;
