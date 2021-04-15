@@ -1,4 +1,4 @@
-import { Body, Controller, Param, Post, Put } from '@nestjs/common';
+import { Body, Controller, Delete, Param, Post, Put } from '@nestjs/common';
 import { ApiResponse } from '@nestjs/swagger';
 import CreateEmployerDto from './dto/create-employer.dto';
 import CreateFreelancerDto from './dto/create-freelancer.dto';
@@ -26,6 +26,12 @@ export class JobseekersController {
     return this.jobseekersService.updateEmployer(emp);
   }
 
+  @ApiResponse({ status: 200, description: "deletes an existing employer" })
+  @Delete('employers')
+  deleteEmployer( @Param() id: number) {
+    return this.jobseekersService.deleteEmployer(id);
+  }
+
   @ApiResponse({ status: 200, description: "creates a new freelancer" })
   @Post('freelancers')
   postFreelancer( @Body() frl: CreateFreelancerDto) {
@@ -36,6 +42,12 @@ export class JobseekersController {
   @Put('freelancers')
   putFreelancer( @Body() frl: UpdateFreelancerDto) {
     return this.jobseekersService.updateFreelancer(frl);
+  }
+
+  @ApiResponse({ status: 200, description: "deletes an existing freelancer" })
+  @Delete('freelancers')
+  deleteFreelancer( @Param() id: number) {
+    return this.jobseekersService.deleteFreelancer(id);
   }
 
   @ApiResponse({ status: 200, description: "creates a new order associated with the employer having 'employerId'" })
@@ -50,6 +62,12 @@ export class JobseekersController {
     return this.jobseekersService.updateOrder(order);
   }
 
+  @ApiResponse({ status: 200, description: "deletes an existing order" })
+  @Delete('employers/orders')
+  deleteOrder( @Param() orderId: number) {
+    return this.jobseekersService.deleteOrder(orderId);
+  }
+
   @ApiResponse({ status: 200, description: "creates a new skill associated with the freelancer having 'freelancerId'" })
   @Post('freelancers/skills')
   postSkill( @Body() skill: CreateSkillDto) {
@@ -60,5 +78,11 @@ export class JobseekersController {
   @Put('freelancers/skills')
   putSkill( @Body() skill: UpdateSkillDto) {
     return this.jobseekersService.updateSkill(skill);
+  }
+
+  @ApiResponse({ status: 200, description: "deletes an existing skill" })
+  @Delete('freelancers/skills')
+  deleteSkill( @Param() skillId: number) {
+    return this.jobseekersService.deleteSkill(skillId);
   }
 }

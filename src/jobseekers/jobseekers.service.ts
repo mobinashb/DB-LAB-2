@@ -33,6 +33,11 @@ export class JobseekersService {
     await employer.save();
     return employer;
   }
+  async deleteEmployer(id: number): Promise<EmployerEntity> {
+    const employer = await EmployerEntity.findOne(id);
+    await employer.remove();
+    return employer;
+  }
   async insertOrder(orderDetails: CreateOrderDto): Promise<OrderEntity> {
     const newOrder = OrderEntity.create();
     const {employerId, budget, duration, description, category, minWorkExp} = orderDetails;
@@ -57,6 +62,11 @@ export class JobseekersService {
     await order.save();
     return order;
   }
+  async deleteOrder(orderId: number): Promise<OrderEntity> {
+    const order = await OrderEntity.findOne(orderId);
+    await order.remove();
+    return order;
+  }
   async insertFreelancer(freelancerDetails: CreateFreelancerDto): Promise<FreelancerEntity> {
     const freelancerEntity: FreelancerEntity = FreelancerEntity.create();
     const {name, cardNum} = freelancerDetails;
@@ -71,6 +81,11 @@ export class JobseekersService {
     const freelancer = await FreelancerEntity.findOne(id);
     freelancer.name = name;
     await freelancer.save();
+    return freelancer;
+  }
+  async deleteFreelancer(id: number): Promise<FreelancerEntity> {
+    const freelancer = await FreelancerEntity.findOne(id);
+    await freelancer.remove();
     return freelancer;
   }
   async insertSkill(skillDetails: CreateSkillDto): Promise<SkillEntity> {
@@ -89,6 +104,11 @@ export class JobseekersService {
     skill.name = name;
     skill.level = level;
     await skill.save();
+    return skill;
+  }
+  async deleteSkill(skillId: number): Promise<SkillEntity> {
+    const skill = await SkillEntity.findOne(skillId);
+    await skill.remove();
     return skill;
   }
 }
