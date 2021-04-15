@@ -14,6 +14,9 @@ import UpdateSkillDto from './dto/update-skill.dto';
 
 @Injectable()
 export class JobseekersService {
+  async getAllEmployers(): Promise<EmployerEntity[] > {
+    return EmployerEntity.find();
+  }
   async insertEmployer(employerDetails: CreateEmployerDto): Promise<EmployerEntity> {
     const newEmployer: EmployerEntity = EmployerEntity.create();
     const {name, organization} = employerDetails;
@@ -37,6 +40,9 @@ export class JobseekersService {
     const employer = await EmployerEntity.findOne(id);
     await employer.remove();
     return employer;
+  }
+  async getAllOrders(): Promise<OrderEntity[] > {
+    return OrderEntity.find();
   }
   async insertOrder(orderDetails: CreateOrderDto): Promise<OrderEntity> {
     const newOrder = OrderEntity.create();
@@ -67,6 +73,9 @@ export class JobseekersService {
     await order.remove();
     return order;
   }
+  async getAllFreelancers(): Promise<FreelancerEntity[] > {
+    return FreelancerEntity.find();
+  }
   async insertFreelancer(freelancerDetails: CreateFreelancerDto): Promise<FreelancerEntity> {
     const freelancerEntity: FreelancerEntity = FreelancerEntity.create();
     const {name, cardNum} = freelancerDetails;
@@ -89,6 +98,9 @@ export class JobseekersService {
     await freelancer.remove();
     return freelancer;
   }
+  async getAllSkills(): Promise<SkillEntity[] > {
+    return SkillEntity.find();
+  }
   async insertSkill(skillDetails: CreateSkillDto): Promise<SkillEntity> {
     const newSkill = SkillEntity.create();
     const {freelancerId, name, level} = skillDetails;
@@ -109,7 +121,7 @@ export class JobseekersService {
   }
   async deleteSkill(skillId: number): Promise<SkillEntity> {
     const skill = await SkillEntity.findOne(skillId);
-    await skill.remove();
+    await SkillEntity.remove(skill);
     return skill;
   }
 }

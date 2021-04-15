@@ -1,4 +1,4 @@
-import { Body, Controller, Delete, Param, Post, Put } from '@nestjs/common';
+import { Body, Controller, Delete, Get, Param, Post, Put } from '@nestjs/common';
 import { ApiResponse } from '@nestjs/swagger';
 import CreateEmployerDto from './dto/create-employer.dto';
 import CreateFreelancerDto from './dto/create-freelancer.dto';
@@ -13,6 +13,12 @@ import { JobseekersService } from './jobseekers.service';
 @Controller('jobseekers')
 export class JobseekersController {
   constructor(private readonly jobseekersService: JobseekersService) {}
+
+  @ApiResponse({ status: 200, description: "retrieves all employers" })
+  @Get('employers')
+  getEmployers() {
+    return this.jobseekersService.getAllEmployers();
+  }
 
   @ApiResponse({ status: 200, description: "creats a new employer" })
   @Post('employers')
@@ -30,6 +36,12 @@ export class JobseekersController {
   @Delete('employers')
   deleteEmployer( @Param() id: number) {
     return this.jobseekersService.deleteEmployer(id);
+  }
+
+  @ApiResponse({ status: 200, description: "retrieves all freelancers" })
+  @Get('freelancers')
+  getFreelancers() {
+    return this.jobseekersService.getAllFreelancers();
   }
 
   @ApiResponse({ status: 200, description: "creates a new freelancer" })
@@ -50,6 +62,12 @@ export class JobseekersController {
     return this.jobseekersService.deleteFreelancer(id);
   }
 
+  @ApiResponse({ status: 200, description: "retrieves all orders" })
+  @Get('employers/orders')
+  getOrders() {
+    return this.jobseekersService.getAllOrders();
+  }
+
   @ApiResponse({ status: 200, description: "creates a new order associated with the employer having 'employerId'" })
   @Post('employers/orders')
   postOrder( @Body() order: CreateOrderDto) {
@@ -66,6 +84,12 @@ export class JobseekersController {
   @Delete('employers/orders')
   deleteOrder( @Param() id: number) {
     return this.jobseekersService.deleteOrder(id);
+  }
+
+  @ApiResponse({ status: 200, description: "retrieves all skills" })
+  @Get('freelancers/skills')
+  getSkills() {
+    return this.jobseekersService.getAllSkills();
   }
 
   @ApiResponse({ status: 200, description: "creates a new skill associated with the freelancer having 'freelancerId'" })
